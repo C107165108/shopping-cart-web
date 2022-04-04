@@ -1,41 +1,39 @@
 import 'antd/dist/antd.css';
 import { Card, Button, Input, Row, Col } from 'antd';
 
-
-
-const ProductItem = ({ i, cart, decreaseQuantity, increaseQuantity, addToCart }) => {
+const ProductItem = ({ i, product, decreaseQuantity, increaseQuantity, addToCart }) => {
 
     const { size } = 'small';
 
     return (
         <Card
-            key={cart.name}
+            key={product.name}
             hoverable
-            style={{ width: 300, margin: 20 }}
-            cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}>
-            <Row justify='space-between'>
-                <h3>{cart.name}</h3>
-                <h4>{cart.price}</h4>
+            style={{ width: 360, margin: 20 }}
+            cover={<img alt="example" src={product.img} style={{ width: '100%', height: 200, objectFit: 'cover' }} />}>
+
+            <Row justify='space-between' align="middle">
+                <h3>{product.name}</h3>
+                <h2 style={{ color: '#78c22e', fontWeight: '600' }}>${product.price}</h2>
             </Row>
-            {!cart.inCart ? (
+            {!product.inCart ? (
                 <>
-                    <Row justify='space-around'>
+                    <Row justify='space-between'>
                         <Button onClick={() => decreaseQuantity(i)} size={size} >-</Button>
-                        <Input value={cart.counterVal} style={{ width: 100 }} />
+                        <Input value={product.counterVal} style={{ width: 200 }} />
                         <Button onClick={() => increaseQuantity(i)} size={size} >+</Button>
                     </Row>
                     <br />
                     <Row justify='center' >
-                        <Button onClick={() => addToCart(i)} type="primary" block>加入購物車</Button>
+                        <Button onClick={() => addToCart(i)} type="primary" size='large' block>加入購物車</Button>
                     </Row>
                 </>
             ) : (
                 <Col>
-                    <br />
-                    <br />
+                    <div style={{ margin: 32 }} />
                     <br />
                     <Row justify='center'>
-                        <Button type="primary" disabled block>
+                        <Button type="primary" size='large' disabled block>
                             已加入購物車
                         </Button>
                     </Row>

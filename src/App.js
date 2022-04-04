@@ -1,20 +1,38 @@
-import React, { useState } from "react";
-import API from "./mockAPI";
+import React, { useState, useEffect } from "react";
+
 import ProductList from './ProductList';
 import Headers from './Headers';
 
+import './App.less';
 import 'antd/dist/antd.css';
-import {  Layout } from 'antd';
+import { Layout } from 'antd';
 
+import { db } from './firebase-config';
+import { collection, getDocs } from '@firebase/firestore'
 
 
 export default function App() {
-  
-  const [carts, setCarts] = useState(API);
-  const { Header, Footer, Content } = Layout;
+
+  const [products, setProducts] = useState([]);
+
+  const productsCollectionRef = collection(db, 'products');
+  const { Footer, Content } = Layout;
+
+  useEffect(() => {
+
+    const getTravels = async () => {
+      const data = await getDocs(productsCollectionRef);
+      const productdata = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      setProducts(productdata)
+
+    }
+
+    getTravels();
+
+  }, [])
 
   const addToCart = i => {
-    setCarts(prevState =>
+    setProducts(prevState =>
       prevState.map((item, o) => {
         if (i === o) {
           return {
@@ -29,7 +47,7 @@ export default function App() {
   };
 
   const increaseQuantity = i => {
-    setCarts(prevCart =>
+    setProducts(prevCart =>
       prevCart.map((item, o) => {
         if (i === o && item.inCart) {
           if (item.count > 9) {
@@ -50,7 +68,7 @@ export default function App() {
   };
 
   const decreaseQuantity = i => {
-    setCarts(prevCart =>
+    setProducts(prevCart =>
       prevCart.map((item, o) => {
         if (i === o && item.inCart) {
           if (item.count > 1) {
@@ -70,7 +88,7 @@ export default function App() {
   };
 
   const removeFromCart = i => {
-    setCarts(prevCart =>
+    setProducts(prevCart =>
       prevCart.map((item, o) => {
         if (i === o) {
           return {
@@ -85,31 +103,30 @@ export default function App() {
     );
   };
 
-  const cartCountTotal = carts.reduce((acc, item) => acc + item.count, 0);
-  const cartPriceTotal = carts.reduce((acc, item) => acc + item.price * item.count, 0);
+  const cartCountTotal = products.reduce((acc, product) => acc + product.count, 0);
+  const cartPriceTotal = products.reduce((acc, product) => acc + product.price * product.count, 0);
 
 
   return (
 
     <Layout>
-      <Header>
-        <Headers
-          decreaseQuantity={decreaseQuantity}
-          increaseQuantity={increaseQuantity}
-          removeFromCart={removeFromCart}
-          cartCountTotal={cartCountTotal}
-          cartPriceTotal={cartPriceTotal}
-          carts={carts} />
-      </Header>
-      <Content>
-        <ProductList
 
-          carts={carts}
+      <Headers
+        decreaseQuantity={decreaseQuantity}
+        increaseQuantity={increaseQuantity}
+        removeFromCart={removeFromCart}
+        cartCountTotal={cartCountTotal}
+        cartPriceTotal={cartPriceTotal}
+        products={products} />
+
+      <Content style={{ backgroundColor: '#f4f3f0', display: 'flex', justifyContent: 'center' }}>
+        <ProductList
+          products={products}
           decreaseQuantity={decreaseQuantity}
           increaseQuantity={increaseQuantity}
           addToCart={addToCart} />
       </Content>
-      <Footer>Footer</Footer>
+
     </Layout>
 
   );

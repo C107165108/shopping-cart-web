@@ -3,21 +3,22 @@ import { Row } from 'antd';
 
 import ProductItem from './ProductItem';
 
-const ProductList = ({ carts, decreaseQuantity, increaseQuantity, addToCart }) => (
+const ProductList = ({ products, decreaseQuantity, increaseQuantity, addToCart }) => (
 
-    <Row style={{ marginTop: 40, display: 'flex',justifyContent:'center' }}>
-    <Row style={{ display: 'flex', flexWrap: 'wrap' }}>
+    <Row style={{ margin: '20px 80px 0px 90px', display: 'flex', justifyContent: 'center' }}>
+        <Row style={{ display: 'flex', flexWrap: 'wrap' }}>
 
-        {carts.map((cart, i) => (
-            <ProductItem
-                cart={cart}
-                i={i}
-                decreaseQuantity={decreaseQuantity}
-                increaseQuantity={increaseQuantity}
-                addToCart={addToCart} />
-        ))}
+            {products.map((product, i) => (
+                <ProductItem
+                    key={i}
+                    product={product}
+                    i={i}
+                    decreaseQuantity={decreaseQuantity}
+                    increaseQuantity={increaseQuantity}
+                    addToCart={addToCart} />
+            ))}
 
-    </Row>
         </Row>
+    </Row>
 );
 export default ProductList;
