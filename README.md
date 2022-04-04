@@ -1,6 +1,7 @@
 # Shopping Cart Web
 
-<a herf='https://c107165108.github.io/shopping-cart-web/index.html'>Demo</a>
+For more information, see the [contributor guide index](https://c107165108.github.io/shopping-cart-web/index.html).
+<a herf=''>Demo</a>
 
 ```
 firebase \ react \ AntDesign
