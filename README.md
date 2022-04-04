@@ -1,7 +1,7 @@
 # Shopping Cart Web
 
 ```
-firebase \ react \ 
+firebase \ react \ AntDesign
 ```
 
 ### ` 購物車網站 `
