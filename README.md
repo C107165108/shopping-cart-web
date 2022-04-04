@@ -1,11 +1,8 @@
 # Shopping Cart Web
 
- [ＤＥＭＯ](https://c107165108.github.io/shopping-cart-web/index.html).
-<a herf=''>Demo</a>
+ [DEMO](https://c107165108.github.io/shopping-cart-web/index.html).
 
-```
-firebase \ react \ AntDesign
-```
+### ` firebase `### ` react `### ` AntDesign `
 
 ### ` 購物車網站 `
 
