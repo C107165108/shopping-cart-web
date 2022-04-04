@@ -1,6 +1,6 @@
 # Shopping Cart Web
 
-For more information, see the [contributor guide index](https://c107165108.github.io/shopping-cart-web/index.html).
+ [ＤＥＭＯ](https://c107165108.github.io/shopping-cart-web/index.html).
 <a herf=''>Demo</a>
 
 ```
